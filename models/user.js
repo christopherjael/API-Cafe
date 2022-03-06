@@ -5,9 +5,9 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Name is required']
     },
-    mail: {
+    email: {
         type: String,
-        required: [true, 'Mail is required'],
+        required: [true, 'Email is required'],
         unique: true
     },
     password: {
@@ -31,5 +31,10 @@ const userSchema = new Schema({
         default: false
     }
 });
+
+userSchema.methods.toJSON = function (){
+    const { __v, password ,...user} = this.toObject();
+    return user;
+}
 
 module.exports = model('User', userSchema);
