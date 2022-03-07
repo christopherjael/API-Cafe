@@ -1,8 +1,8 @@
 {
-  "name": "07-restserver",
+  "name": "api-cafe",
   "version": "1.0.0",
-  "description": "Recuerden que deben de ejecutar ```npm install``` para reconstruir los módulos de Node.",
-  "main": "index.js",
+  "description": "rest api cafe",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js"
