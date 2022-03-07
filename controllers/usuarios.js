@@ -1,70 +1,59 @@
-const { response, request } = require('express');
-const User = require('../models/user')
-const bcryptjs = require('bcryptjs');
-const { validationResult } = require('express-validator');
+const { response, request } = require("express");
+const User = require("../models/user");
+const bcryptjs = require("bcryptjs");
 
+const usuariosGet = async (req = request, res = response) => {
+    const { limit = 5, skip = 0 } = req.query;
 
-const usuariosGet = (req = request, res = response) => {
+    const query = { state: true };
 
-    const { q, nombre = 'No name', apikey, page = 1, limit } = req.query;
+    const [totalDocuments, users] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query).skip(skip).limit(limit)
+    ]);
 
-    res.json({
-        msg: 'get API - controlador',
-        q,
-        nombre,
-        apikey,
-        page, 
-        limit
-    });
-}
+    res.json({ totalDocuments, users });
+};
 
-const usuariosPost = async(req, res = response) => {
-    const {name, email, password, role} = req.body;
-    const user = new User({name, email, password, role} );
+const usuariosPost = async (req, res = response) => {
+    const { name, email, password, role } = req.body;
 
-    //verificar si el correo ya existe
-    const emailExists = await User.findOne({email})
-    
-    if( emailExists ){
-        return res.status(400).json({
-            message: 'Email already exists'
-        });
-    };
+    const user = new User({ name, email, password, role });
 
     //encriptar la contraseña
     const salt = bcryptjs.genSaltSync();
     user.password = bcryptjs.hashSync(password, salt);
     await user.save();
-    res.json({
-        msg: 'post API - usuariosPost',
-        user
-    });
-}
+    res.json({ user });
+};
 
-const usuariosPut = (req, res = response) => {
-
+const usuariosPut = async (req, res = response) => {
     const { id } = req.params;
+    const { __id, password, google_auth, ...rest } = req.body;
 
-    res.json({
-        msg: 'put API - usuariosPut',
-        id
-    });
-}
+    if (password) {
+        const salt = bcryptjs.genSaltSync();
+        rest.password = bcryptjs.hashSync(password, salt);
+    }
+
+    const user = await User.findByIdAndUpdate(id, rest);
+
+    res.json({ user });
+};
 
 const usuariosPatch = (req, res = response) => {
     res.json({
-        msg: 'patch API - usuariosPatch'
+        msg: "patch API - usuariosPatch",
     });
-}
+};
 
-const usuariosDelete = (req, res = response) => {
+const usuariosDelete = async (req, res = response) => {
+    const { id } = req.params;
+    const user = await User.findByIdAndUpdate(id, { state: false });
     res.json({
-        msg: 'delete API - usuariosDelete'
+        user
     });
-}
-
-
-
+};
 
 module.exports = {
     usuariosGet,
@@ -72,4 +61,4 @@ module.exports = {
     usuariosPut,
     usuariosPatch,
     usuariosDelete,
-}
+};
