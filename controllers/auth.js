@@ -1,8 +1,7 @@
 const bcryptjs = require('bcryptjs');
 const { jwtGenerator } = require('../helpers/jwtGenerator');
 const { googleVerify } = require('../helpers/google-verify')
-const User = require('../models/user')
-const bcryptjs = require('bcryptjs');
+const User = require('../models/user');
 
 const salt = bcryptjs.genSaltSync(10);
 
