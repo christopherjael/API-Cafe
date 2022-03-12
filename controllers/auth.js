@@ -2,6 +2,9 @@ const bcryptjs = require('bcryptjs');
 const { jwtGenerator } = require('../helpers/jwtGenerator');
 const { googleVerify } = require('../helpers/google-verify')
 const User = require('../models/user')
+const bcryptjs = require('bcryptjs');
+
+const salt = bcryptjs.genSaltSync(10);
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -54,7 +57,7 @@ const googleSignIn = async (req, res) => {
             const data = {
                 name,
                 email,
-                password: 'admin123',
+                password: bcryptjs.hashSync('admin123', salt),
                 picture,
                 google_auth: true,
                 role: 'USER_ROLE'
