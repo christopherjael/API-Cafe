@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const { jwtGenerator } = require('../helpers/jwtGenerator');
+const { googleVerify } = require('../helpers/google-verify')
 const User = require('../models/user')
 
 const login = async (req, res) => {
@@ -40,6 +41,51 @@ const login = async (req, res) => {
     };
 };
 
+
+const googleSignIn = async (req, res) => {
+    const { id_token } = req.body;
+
+    try {
+        const { name, email, picture } = await googleVerify(id_token);
+
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            const data = {
+                name,
+                email,
+                password: 'admin123',
+                picture,
+                google_auth: true,
+                role: 'USER_ROLE'
+            };
+
+            user = new User(data);
+            await user.save();
+        };
+
+        if (!user.state) {
+            return res.status(401).json({
+                message: 'This user is deleted'
+            })
+        }
+
+        const token = await jwtGenerator(user._id)
+
+        res.json({
+            message: 'Google signed',
+            user,
+            token
+        });
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        });
+    }
+
+}
+
 module.exports = {
-    login
+    login,
+    googleSignIn
 };
