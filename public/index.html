@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Welcome to API cafe</h1>
 
-    <div id="g_id_onload" data-client_id="88070529432-5rndf165j7tij44sp4fg2treienrub4c.apps.googleusercontent.com"
-        data-login_uri="https://your.domain/your_login_endpoint" data-callback="handleCredentialResponse"
-        data-auto_prompt="false"></div>
-    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
-        data-shape="rectangular" data-logo_alignment="left"></div>
+    <div
+      id="g_id_onload"
+      data-client_id="88070529432-5rndf165j7tij44sp4fg2treienrub4c.apps.googleusercontent.com"
+      data-login_uri="https://your.domain/your_login_endpoint"
+      data-callback="handleCredentialResponse"
+      data-auto_prompt="false"
+    ></div>
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left"
+    ></div>
 
     <button id="google-signout">Sign out</button>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script>
-        function handleCredentialResponse(response) {
-            const body = { id_token: response.credential };
-            const url = window.location.hostname.includes("localhost")
-                ? "http://localhost:3000/api/auth/google"
-                : "https://api-cafe-nodejs.herokuapp.com/api/auth/google";
+      function handleCredentialResponse(response) {
+        const body = { id_token: response.credential };
+        const url = window.location.hostname.includes('localhost')
+          ? 'http://localhost:3000/api/auth/google'
+          : 'https://api-cafe-nodejs.herokuapp.com/api/auth/google';
 
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify(body),
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    localStorage.setItem("email", response.user.email);
-                    location.reload();
-                })
-                .catch((error) => console.warn(error));
-        }
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            localStorage.setItem('email', response.user.email);
+            location.reload();
+          })
+          .catch((error) => console.warn(error));
+      }
 
-        const $button = document.getElementById("google-signout");
+      const $button = document.getElementById('google-signout');
 
-        $button.onclick = () => {
-            google.accounts.id.disableAutoSelect();
-            google.accounts.id.revoke(localStorage.getItem("email"), (done) => {
-                localStorage.clear();
-                location.reload();
-            });
-        };
+      $button.onclick = () => {
+        google.accounts.id.disableAutoSelect();
+        google.accounts.id.revoke(localStorage.getItem('email'), (done) => {
+          localStorage.clear();
+          location.reload();
+        });
+      };
     </script>
-</body>
-
+  </body>
 </html>
