@@ -1,7 +1,7 @@
-const bcryptjs = require("bcryptjs");
-const { jwtGenerator } = require("../helpers/jwtGenerator");
-const { googleVerify } = require("../helpers/google-verify");
-const User = require("../models/user");
+const bcryptjs = require('bcryptjs');
+const { jwtGenerator } = require('../helpers/jwtGenerator');
+const { googleVerify } = require('../helpers/google-verify');
+const { User } = require('../models/index');
 
 const salt = bcryptjs.genSaltSync(10);
 
@@ -12,18 +12,18 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: "Email and password invalid" });
+      return res.status(400).json({ message: 'Email and password invalid' });
     }
 
     if (!user.state) {
       return res
         .status(400)
-        .json({ message: "Email and password invalid, state: false" });
+        .json({ message: 'Email and password invalid, state: false' });
     }
 
     const validPassword = bcryptjs.compareSync(password, user.password);
     if (!validPassword) {
-      return res.status(400).json({ message: "Email and password invalid" });
+      return res.status(400).json({ message: 'Email and password invalid' });
     }
 
     const token = await jwtGenerator(user._id);
@@ -52,10 +52,10 @@ const googleSignIn = async (req, res) => {
       const data = {
         name,
         email,
-        password: bcryptjs.hashSync("admin123", salt),
+        password: bcryptjs.hashSync('admin123', salt),
         picture,
         google_auth: true,
-        role: "USER_ROLE",
+        role: 'USER_ROLE',
       };
 
       user = new User(data);
@@ -64,14 +64,14 @@ const googleSignIn = async (req, res) => {
 
     if (!user.state) {
       return res.status(401).json({
-        message: "This user is deleted",
+        message: 'This user is deleted',
       });
     }
 
     const token = await jwtGenerator(user._id);
 
     res.json({
-      message: "Google signed",
+      message: 'Google signed',
       user,
       token,
     });

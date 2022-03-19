@@ -1,6 +1,6 @@
-const { response, request } = require("express");
-const User = require("../models/user");
-const bcryptjs = require("bcryptjs");
+const { response, request } = require('express');
+const { User } = require('../models/index');
+const bcryptjs = require('bcryptjs');
 
 const usuariosGet = async (req = request, res = response) => {
   const { limit = 5, skip = 0 } = req.query;
@@ -43,7 +43,7 @@ const usuariosPut = async (req, res = response) => {
 
 const usuariosPatch = (req, res = response) => {
   res.json({
-    msg: "patch API - usuariosPatch",
+    msg: 'patch API - usuariosPatch',
   });
 };
 

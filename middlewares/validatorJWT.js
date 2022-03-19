@@ -1,13 +1,13 @@
-const { request } = require("express");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const { request } = require('express');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models/index');
 
 const validatorJWT = async (req = request, res, next) => {
-  const token = req.header("x-token");
+  const token = req.header('x-token');
 
   if (!token) {
-    res.status(401).json({
-      message: "There are not token in the request",
+    return res.status(401).json({
+      message: 'There are not token in the request',
     });
   }
 
@@ -18,13 +18,13 @@ const validatorJWT = async (req = request, res, next) => {
 
     if (!req.user) {
       return res.status(401).json({
-        message: "Invalid user",
+        message: 'Invalid user',
       });
     }
 
     if (req.user.state === false) {
       return res.status(401).json({
-        message: "Token not valid because the user is deleted",
+        message: 'Token not valid because the user is deleted',
       });
     }
 
@@ -34,7 +34,7 @@ const validatorJWT = async (req = request, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(401).json({
-      message: "Invalid token",
+      message: 'Invalid token',
     });
   }
 };

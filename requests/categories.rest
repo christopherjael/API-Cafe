@@ -1,0 +1,39 @@
+// PATH: /api/categories
+
+// get categories
+GET http://localhost:3000/api/categories
+
+###
+// get a category by id
+// params: id
+GET http://localhost:3000/api/categories/:id
+
+###
+
+// create a new category
+POST http://localhost:3000/api/categories
+Content-Type: application/json
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjI3ZjE5NDQxYWJjNDQwYzYzOTMwZmYiLCJpYXQiOjE2NDc2MTA3MTAsImV4cCI6MTY0NzYyNTExMH0.wQmIkw8Ap2boXAu6DJ8SvAEyvdVI1PyRkP74pJqWhdw
+
+{
+
+}
+
+###
+
+// Update a category
+// params: id
+PUT http://localhost:3000/api/categories/:id
+Content-Type: application/json
+
+{
+
+}
+
+###
+
+// Delete a category
+// params: id
+// header: x-token
+DELETE http://localhost:3000/api/categories/:id
+x-token: 
