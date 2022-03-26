@@ -6,6 +6,8 @@ const isAvaliableRole = async (role = '') => {
   if (!roleExists) {
     throw new Error(`Role (${role}) does not exist in the database`);
   }
+
+  return true;
 };
 
 //verificar si el correo ya existe
@@ -15,6 +17,8 @@ const isEmailUsed = async (email = '') => {
   if (emailExists) {
     throw new Error('This email already exists');
   }
+
+  return true;
 };
 
 const existUserById = async (id) => {
@@ -22,6 +26,21 @@ const existUserById = async (id) => {
   if (!userExist) {
     throw new Error('There is no user with this id: ' + id);
   }
+
+  return true;
 };
 
-module.exports = { isAvaliableRole, isEmailUsed, existUserById };
+const allowedCollections = (collection = '', allowedCollections = ['']) => {
+  if (!allowedCollections.includes(collection)) {
+    throw new Error('this collection is not allowed');
+  }
+
+  return true;
+};
+
+module.exports = {
+  isAvaliableRole,
+  isEmailUsed,
+  existUserById,
+  allowedCollections,
+};

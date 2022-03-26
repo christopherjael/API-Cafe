@@ -33,6 +33,7 @@ const ProductsSchema = new Schema({
     ref: 'User',
     required: true,
   },
+  img: { type: String },
 });
 
 ProductsSchema.methods.toJSON = function () {
