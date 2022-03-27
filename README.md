@@ -1,34 +1,19 @@
 # API Cafe
 
-Use `npm install` for installing dependencies.
+## Instation 
+After dowmload the project and opening in your code editor use `npm install` in the terminal for installing dependencies. For running the project in dev mode use `npm run dev`
 
-## Endpoints
+## About the API
 
-- GET `/api/users/` : Return a list of users.
+### Technologies 🧰
+* **NodeJS** -> Run time to javascript 
+* **Express** -> Http-Server framework 
+* **Google Identity** -> Access manager
+* **Cloudinary** -> Assets hosting
+* **Mongodb** -> No-relational database
+* **JWT** -> Token generador
+* **Heroku** -> Hosting
 
-  - Querys optionals
-    - `limit` : Define maximum number of users of request, _default is 5_.
-    - `skip` : Defines from which user the list will start, _default is 0_.
+### API documentation 📖
 
-- POST `/api/users/:id` : Create a new user.
-
-  - Params
-    - `id` : It has to be a valid mongo id.
-  - Body JSON
-    - `name String` : Name of the user.
-    - `email String` : Email of the user.
-    - `password String` : Password of the user.
-    - `role String`: Role of the user, can be **ADMIN_ROLE**, **USER_ROLE** or **SALES_ROLE**
-
-- PUT `/api/users/:id` : Update a user.
-  - Params
-    - `id` : It has to be a valid mongo id.
-  - Body JSON
-    - `name String` : Name of the user.
-    - `email String` : Email of the user.
-    - `password String` : Password of the user.
-    - `role String` : Role of the user, can be **ADMIN_ROLE**, **USER_ROLE** or **SALES_ROLE**
-    - `google_auth Boolean` : Change to google_auth true or false.
-- DELETE `/api/users/:id` : Delete a user
-  - Params
-    - `id` : It has to be a valid mongo id.
+You can see the full api documentation ➡️ [Here](https://documenter.getpostman.com/view/12031040/UVyn2yuH)
