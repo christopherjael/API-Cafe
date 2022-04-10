@@ -1,0 +1,7 @@
+@baseURL = http://localhost:3000
+
+// Search
+// params: collection, term
+// collection can be [users, categories, products]
+// tem cab be mongoId or string
+GET {{baseURL}}/api/search/products/arroz

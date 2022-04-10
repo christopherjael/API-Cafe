@@ -1,0 +1,54 @@
+@baseURL = http://localhost:3000
+
+// Upload
+// body: file
+POST {{baseURL}}/api/uploads HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="01400006381.jpg"
+Content-Type: image/jpeg
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+###
+
+//Update img user
+// params: id
+PUT {{baseURL}}/api/uploads/users/62251431456dafc61ec8c42d HTTP/1.1
+Host: http://localhost:3000
+Content-Length: 171
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.jpg"
+Content-Type: image/jpeg
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+###
+
+// Update img products
+PUT {{baseURL}}/api/uploads/products/623522d1ff8b92cd51d4e5c6 HTTP/1.1
+Host: //localhost:3000
+Content-Length: 202
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="b0ebc4dc68fda634f19ace6a87eb6ebd.jpg"
+Content-Type: image/jpeg
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+###
+
+// Get user img
+GET {{baseURL}}/api/uploads/users/62251431456dafc61ec8c42a HTTP/1.1
+
+###
+
+// Get product img
+GET {{baseURL}}/api/uploads/products/623522d1ff8b92cd51d4e5c6 HTTP/1.1

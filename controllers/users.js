@@ -2,6 +2,7 @@ const { response, request } = require('express');
 const { User } = require('../models/index');
 const bcryptjs = require('bcryptjs');
 
+// get all users
 const usuariosGet = async (req = request, res = response) => {
   const { limit = 5, skip = 0 } = req.query;
 
@@ -15,6 +16,15 @@ const usuariosGet = async (req = request, res = response) => {
   res.json({ totalDocuments, users });
 };
 
+// get usre by id
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+
+  res.json(user);
+};
+
+// create a new user
 const usuariosPost = async (req, res = response) => {
   const { name, email, password, role } = req.body;
 
@@ -27,6 +37,7 @@ const usuariosPost = async (req, res = response) => {
   res.json({ user });
 };
 
+// updata a user
 const usuariosPut = async (req, res = response) => {
   const { id } = req.params;
   const { __id, password, google_auth, ...rest } = req.body;
@@ -41,12 +52,7 @@ const usuariosPut = async (req, res = response) => {
   res.json({ user });
 };
 
-const usuariosPatch = (req, res = response) => {
-  res.json({
-    msg: 'patch API - usuariosPatch',
-  });
-};
-
+// delete a user
 const usuariosDelete = async (req, res = response) => {
   const { id } = req.params;
   const user = await User.findByIdAndUpdate(id, { state: false });
@@ -59,6 +65,6 @@ module.exports = {
   usuariosGet,
   usuariosPost,
   usuariosPut,
-  usuariosPatch,
   usuariosDelete,
+  getUserById,
 };

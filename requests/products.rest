@@ -1,0 +1,50 @@
+@baseURL = http://localhost:3000
+#
+// Get all products
+GET {{baseURL}}/api/products HTTP/1.1
+
+###
+
+// Get product by id
+// params: id
+GET {{baseURL}}/api/products/623522d1ff8b92cd51d4e5c6 HTTP/1.1
+
+###
+
+// Create a new product
+// params: id
+// headers: x-token, Content-Type
+// body: {name: String, price: Number, category: String}
+POST {{baseURL}}/api/products HTTP/1.1
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjI3ZjE5NDQxYWJjNDQwYzYzOTMwZmYiLCJpYXQiOjE2NDc2NDg4MTUsImV4cCI6MTY0NzY2MzIxNX0.EzUtJEZEYEzKiKxqo8la9FTj-nZ8Mv7Rkv8sRJBnFfI
+Content-Type: application/json
+
+{
+    "name": "Leche rica",
+    "price": "150",
+    "category": "lácteos"
+}
+
+###
+
+// Update a product
+// params: id
+// headers: x-token, Content-Type
+// body: { name: String, price: Number, description: String, available: Boolean, user: MongoId }
+PUT {{baseURL}}/api/products/623522e6ff8b92cd51d4e5cb HTTP/1.1
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjI3ZjE5NDQxYWJjNDQwYzYzOTMwZmYiLCJpYXQiOjE2NDc2NDg4MTUsImV4cCI6MTY0NzY2MzIxNX0.EzUtJEZEYEzKiKxqo8la9FTj-nZ8Mv7Rkv8sRJBnFfI
+Content-Type: application/json
+
+{
+    "name": "Arroz Don San Jose",
+    "price": "120",
+    "available": false
+}
+
+###
+
+// Delete a product
+// params: id
+// headers: x-token
+DELETE {{baseURL}}/api/products/623522e6ff8b92cd51d4e5cb HTTP/1.1
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjI3ZjE5NDQxYWJjNDQwYzYzOTMwZmYiLCJpYXQiOjE2NDc2NDg4MTUsImV4cCI6MTY0NzY2MzIxNX0.EzUtJEZEYEzKiKxqo8la9FTj-nZ8Mv7Rkv8sRJBnFfI

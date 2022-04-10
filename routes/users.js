@@ -3,10 +3,10 @@ const { check } = require('express-validator');
 
 const {
   usuariosGet,
+  getUserById,
   usuariosPut,
   usuariosPost,
   usuariosDelete,
-  usuariosPatch,
 } = require('../controllers/users');
 const {
   isAvaliableRole,
@@ -19,6 +19,12 @@ const { validateFields, validatorJWT, isRole } = require('../middlewares');
 const router = Router();
 
 router.get('/', usuariosGet);
+
+router.get(
+  '/:id',
+  [check('id', 'This id is not Mongoid').isMongoId()],
+  getUserById
+);
 
 router.put(
   '/:id',
@@ -62,7 +68,5 @@ router.delete(
   ],
   usuariosDelete
 );
-
-router.patch('/', usuariosPatch);
 
 module.exports = router;

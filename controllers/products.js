@@ -78,6 +78,7 @@ const updateProduct = async (req, res) => {
   res.json({ categoryUpdated });
 };
 
+// DELETE A PRODUCT
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
 

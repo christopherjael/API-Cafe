@@ -1,7 +1,8 @@
-// PATH: /api/auth/
+@baseURL = "http://localhost:3000/"
 
 //Login
-POST http://localhost:3000/api/auth/login HTTP/1.1
+// headers: Content-Type
+POST {{baseURL}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -12,4 +13,4 @@ Content-Type: application/json
 ###
 
 //Google Sign In
-POST http://localhost:3000/api/auth/google HTTP/1.1
+POST {{baseURL}}/api/auth/google HTTP/1.1

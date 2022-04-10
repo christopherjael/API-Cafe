@@ -1,14 +1,20 @@
-
-// PATH: /api/users/
+@baseURL = http://localhost:3000
 
 // Get users - paginate
-// Querys: limit=5, skip=0
-GET http://localhost:3000/api/users
+// querys: limit=5, skip=0
+GET {{baseURL}}/api/users?limit=10&skip=1 HTTP/1.1
+
+###
+// Get user by id
+// params: id
+GET {{baseURL}}/api/users/62251454456dafc61ec8c43d HTTP/1.1
 
 ###
 
 //Create users
-POST http://localhost:3000/api/users HTTP/1.1
+// headers: Content-Type
+// body: {name: String, email: String, password: String, role: enum}
+POST {{baseURL}}/api/users HTTP/1.1
 Content-Type: application/json
 
 {
@@ -20,13 +26,14 @@ Content-Type: application/json
 
 ###
 
-//Update one user
-//params: id
-PUT http://localhost:3000/api/users/62238d10ce4f8720d9ddb5c1 HTTP/1.1
+// Update one user
+// params: id
+// headers: Content-Type
+// body: {name: String, email: String, password: String, role: enum, google_auth: Boolean}
+PUT {{baseURL}}/api/users/62238d10ce4f8720d9ddb5c1 HTTP/1.1
 Content-Type: application/json
 
 {
-    "__id": "62238d10ce4f8720d9ddb5c1",
     "name": "test",
     "email": "test@test.com",
     "password": "test12345",
@@ -36,8 +43,8 @@ Content-Type: application/json
 
 ###
 
-//Delete one user
-//params: id
-//header: x-token
-DELETE http://localhost:3000/api/users/622fc5ab4fe7c37d13513072 HTTP/1.1
+// Delete one user
+// params: id
+// headers : x-token
+DELETE {{baseURL}}/api/users/622fc5ab4fe7c37d13513072 HTTP/1.1
 x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjI3ZjE5NDQxYWJjNDQwYzYzOTMwZmYiLCJpYXQiOjE2NDcyOTg3MjksImV4cCI6MTY0NzMxMzEyOX0.ZeDhdZLUsDUiMV2SxR33_SKVhAsq-p8l6CVvoJEB0pE

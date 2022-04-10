@@ -26,14 +26,14 @@ const getCategories = async (req, res) => {
   const { limit = 5, skip = 0 } = req.query;
   const query = { state: true };
 
-  const [count, Categories] = await Promise.all([
+  const [count, categories] = await Promise.all([
     Categories.countDocuments(query),
     Categories.find(query).populate('user', 'email').limit(limit).skip(skip),
   ]);
 
   res.status(200).json({
     numberOfDocuments: count,
-    Categories,
+    categories,
   });
 };
 
