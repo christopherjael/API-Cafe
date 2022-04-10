@@ -1,6 +1,6 @@
 # API Cafe
 
-## Instation 
+## Installation  
 After dowmload the project and opening in your code editor use `npm install` in the terminal for installing dependencies. For running the project in dev mode use `npm run dev`
 
 ## About the API
