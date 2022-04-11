@@ -1,5 +1,3 @@
-@baseURL = http://localhost:3000
-
 // Get users - paginate
 // querys: limit=5, skip=0
 GET {{baseURL}}/api/users?limit=10&skip=1 HTTP/1.1
